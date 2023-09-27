@@ -1,0 +1,24 @@
+<form [formGroup]="signInForm" (ngSubmit)="signInForm.valid && onSubmit(signInForm.value)" novalidate>
+    <div class="grid blue-container sm:max-w-screen md:max-w-screen  justify-content-start bg-blue-300 ">
+        <div class="col-6 border-round col-offset-2">
+            <h5 class="text-purple-600 text-xl">Login Form</h5>
+        </div>
+        <div class="col-8 sm:col-offset-1 md:col-offset-1 col-offset-1  border-round  bg-blue-400">
+            <div class="card p-3 justify-content-center">
+                <span class="p-float-label">
+                    <input formControlName="userEmail" class="sm:max-w-8rem lg:max-w-screen" pInputText id="username" />
+                    <label htmlFor="username">Username</label>
+                </span>
+            </div>
+        </div>
+        <div class="col-8 col-offset-1 mt-3 border-round  bg-blue-400">
+            <div class="card p-3 justify-content-center">
+                <span class="p-float-label">
+                    <p-password formControlName="password" [feedback]="false"></p-password>
+                    <label htmlFor="Password" class="text-blue-600">Password</label>
+                </span>
+            </div>
+        </div>
+        <button class="col-3 col-offset-2 mt-5 p-3 border-0 bg-purple-500 border-round text-white text-lg te">Submit</button>
+    </div>
+  </form>
