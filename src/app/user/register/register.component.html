@@ -3,10 +3,42 @@
         <div class="col-6 text-3xl">
             Register
         </div>
-        <div class="flex flex-row">
-            <div class="flex align-items-center justify-content-center  bg-blue-500 font-bold text-white border-round m-2">
-                
+        <div class="flex flex-row justify-content-evenly align-items-start">
+            <div class="flex align-items-center justify-content-center  font-bold text-white border-round m-2">
+               <div class="col-6 col-offset-0">
+                <span class="p-input-icon-left p-float-label">
+                    <i class="pi pi-user"></i>
+                    <input type="text" pInputText />
+                    <label htmlFor="username">Username</label>
+                </span>
+               </div>
+               <div class="col-6 col-offset-2">
+                <span class="p-input-icon-left p-float-label">
+                    <i class="pi pi-at"></i>
+                    <input type="text" pInputText />
+                    <label htmlFor="userEmail">Email</label>
+                </span>
+               </div>
             </div>
+           
+        </div>
+        <div class="flex flex-row align-items-center justify-content-center  bg-blue-500 font-bold text-white border-round m-2">
+            <div class="flex align-items-center justify-content-center  font-bold text-white border-round m-2">
+                <div class="col-6 col-offset-0">
+                 <span class="p-input-icon-left p-float-label">
+                     <i class="pi pi-shield"></i>
+                     <p-password ></p-password>
+                     <label htmlFor="username">Password</label>
+                 </span>
+                </div>
+                <div class="col-6 col-offset-2">
+                 <span class="p-input-icon-left p-float-label">
+                     <i class="pi pi-at"></i>
+                     <input type="text" pInputText />
+                     <label htmlFor="userEmail">Email</label>
+                 </span>
+                </div>
+             </div>
         </div>
     </div>
 </form>
