@@ -1,3 +1,4 @@
 export const environment = {
-    userData : "https://localhost:44304/api/Users/GetUsers"
+    userData : "https://localhost:44304/api/Users/GetUsers",
+    cities:""
 }

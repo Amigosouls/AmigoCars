@@ -1,44 +1,82 @@
 <form action="">
-    <div class="card-container w-screen bg-green-400">
-        <div class="col-6 text-3xl">
-            Register
+    <div class="container-fluid w-50 bg-red-400">
+        <div class="row">
+            <div class="col-6 text-3xl">Register</div>
         </div>
-        <div class="flex flex-row justify-content-evenly align-items-start">
-            <div class="flex align-items-center justify-content-center  font-bold text-white border-round m-2">
-               <div class="col-6 col-offset-0">
+
+        <div class="row justify-content-evenly pt-5 w-100  bg-red-600 align-items-start">
+            <div class="col-6 ">
                 <span class="p-input-icon-left p-float-label">
                     <i class="pi pi-user"></i>
-                    <input type="text" pInputText />
+                    <input type="text" pInputText class="w-100" />
                     <label htmlFor="username">Username</label>
                 </span>
-               </div>
-               <div class="col-6 col-offset-2">
+            </div>
+            <div class="col-6 ">
+                <span class="p-input-icon-left p-float-label">
+                    <i class="pi pi-shield"></i>
+                    <p-password class="w-100"></p-password>
+                    <label htmlFor="username">Password</label>
+                </span>
+            </div>
+            <div class="col-6">
                 <span class="p-input-icon-left p-float-label">
                     <i class="pi pi-at"></i>
-                    <input type="text" pInputText />
+                    <input type="text" pInputText style="max-width: 200;" />
                     <label htmlFor="userEmail">Email</label>
                 </span>
-               </div>
             </div>
-           
+
         </div>
-        <div class="flex flex-row align-items-center justify-content-center  bg-blue-500 font-bold text-white border-round m-2">
-            <div class="flex align-items-center justify-content-center  font-bold text-white border-round m-2">
-                <div class="col-6 col-offset-0">
-                 <span class="p-input-icon-left p-float-label">
-                     <i class="pi pi-shield"></i>
-                     <p-password ></p-password>
-                     <label htmlFor="username">Password</label>
-                 </span>
+
+        <div class="row w-100 justify-content-center">
+            <h4>Address</h4>
+            <div class="col-3">
+                <span class="p-float-label">
+                    <p-inputNumber inputId="integeronly"> </p-inputNumber>
+                    <label htmlFor="number-input">PINCODE</label>
+                </span>
+            </div>
+        </div>
+        <div class="row w-100 justify-content-center">
+            <div class="col-3">
+                <span class="p-float-label">
+                    <input type="text" pInputText class="w-100" />
+                    <label htmlFor="number-input">Circle Name</label>
+                </span>
+            </div>
+            <div class="col-3">
+                <span class="p-float-label">
+                    <input type="text" pInputText class="w-100" />
+                    <label htmlFor="number-input">Region Name</label>
+                </span>
+            </div>
+            <div class="col-3">
+                <span class="p-float-label">
+                    <input type="text" pInputText class="w-100" />
+                    <label htmlFor="number-input">Division Name</label>
+                </span>
+            </div>
+            <div class="col-3">
+                <span class="p-float-label">
+                    <input type="text" pInputText class="w-100" />
+                    <label htmlFor="number-input">Office Name</label>
+                </span>
+            </div>
+            <div class="row w-100 justify-content-center">
+                <div class="col-6">
+                    <span class="p-float-label">
+                        <input type="text" pInputText class="w-100" />
+                        <label htmlFor="number-input">District Name</label>
+                    </span>
                 </div>
-                <div class="col-6 col-offset-2">
-                 <span class="p-input-icon-left p-float-label">
-                     <i class="pi pi-at"></i>
-                     <input type="text" pInputText />
-                     <label htmlFor="userEmail">Email</label>
-                 </span>
+                <div class="col-6">
+                    <span class="p-float-label">
+                        <input type="text" pInputText class="w-100" />
+                        <label htmlFor="number-input">State Name</label>
+                    </span>
                 </div>
-             </div>
+            </div>
         </div>
     </div>
 </form>

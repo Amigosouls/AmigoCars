@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 //PrimeNg imports
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
+import { InputNumberModule } from 'primeng/inputnumber';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +31,8 @@ import { PasswordModule } from 'primeng/password';
     ReactiveFormsModule,
     InputTextModule,
     PasswordModule,
-    HttpClientModule
+    HttpClientModule,
+    InputNumberModule
   ],
   providers: [],
   bootstrap: [AppComponent]
