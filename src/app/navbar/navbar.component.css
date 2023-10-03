@@ -1,0 +1,10 @@
+.navbar{
+    background-color: black !important;
+}
+
+.register{
+    background-image: url('https://localhost:44304/Resources/Images/64393.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:cover;
+}

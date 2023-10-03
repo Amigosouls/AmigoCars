@@ -9,8 +9,8 @@ import { Cities } from 'src/models/cities';
 export class CitiesService {
 
   constructor(private httpClient : HttpClient) { }
-  getCities(){
-    return this.httpClient.get<Cities[]>(environment.cities);
+  getCities(pin:number){
+    return this.httpClient.get<Cities[]>(environment.cities+"?pin="+pin);
   }
 
 }

@@ -1,82 +1,99 @@
-<form action="">
-    <div class="container-fluid w-50 bg-red-400">
-        <div class="row">
-            <div class="col-6 text-3xl">Register</div>
-        </div>
-
-        <div class="row justify-content-evenly pt-5 w-100  bg-red-600 align-items-start">
-            <div class="col-6 ">
+<p-toast></p-toast>
+<div class="container-fluid bg-white text-white font-bold">
+        <form [formGroup]="registrationForm" (ngSubmit)="registrationForm.valid && OnSubmit(registrationForm.value)"
+        novalidate>
+        <div class="row justify-content-evenly w-100 align-items-start">
+            <div class="col-12 mt-2">
                 <span class="p-input-icon-left p-float-label">
                     <i class="pi pi-user"></i>
-                    <input type="text" pInputText class="w-100" />
+                    <input type="text" formControlName="userName" pInputText class="w-100" />
                     <label htmlFor="username">Username</label>
                 </span>
             </div>
-            <div class="col-6 ">
+            <div class="col-12 mt-1">
                 <span class="p-input-icon-left p-float-label">
                     <i class="pi pi-shield"></i>
-                    <p-password class="w-100"></p-password>
+                    <p-password formControlName="password" class="w-100" [toggleMask]="true"></p-password>
                     <label htmlFor="username">Password</label>
                 </span>
             </div>
-            <div class="col-6">
+            <div class="col-12 mt-1">
                 <span class="p-input-icon-left p-float-label">
                     <i class="pi pi-at"></i>
-                    <input type="text" pInputText style="max-width: 200;" />
+                    <input type="text" formControlName="userEmail" pInputText style="max-width: 200;" />
                     <label htmlFor="userEmail">Email</label>
-                </span>
-            </div>
-
-        </div>
-
-        <div class="row w-100 justify-content-center">
-            <h4>Address</h4>
-            <div class="col-3">
-                <span class="p-float-label">
-                    <p-inputNumber inputId="integeronly"> </p-inputNumber>
-                    <label htmlFor="number-input">PINCODE</label>
+                    <input hidden value="1"  formControlName="roleId" />
                 </span>
             </div>
         </div>
-        <div class="row w-100 justify-content-center">
-            <div class="col-3">
-                <span class="p-float-label">
-                    <input type="text" pInputText class="w-100" />
-                    <label htmlFor="number-input">Circle Name</label>
-                </span>
-            </div>
-            <div class="col-3">
-                <span class="p-float-label">
-                    <input type="text" pInputText class="w-100" />
-                    <label htmlFor="number-input">Region Name</label>
-                </span>
-            </div>
-            <div class="col-3">
-                <span class="p-float-label">
-                    <input type="text" pInputText class="w-100" />
-                    <label htmlFor="number-input">Division Name</label>
-                </span>
-            </div>
-            <div class="col-3">
-                <span class="p-float-label">
-                    <input type="text" pInputText class="w-100" />
-                    <label htmlFor="number-input">Office Name</label>
-                </span>
+        <form [formGroup]="addressDetails">
+            <div class="row w-100 justify-content-start">
+                <div class="col-7">
+                    <div class="form-floating">
+                        <input class="form-control text-gray-800 " placeholder="PINCODE" formControlName="Pincode" inputId="integeronly"/> 
+                        <label class="text-gray-800" for="floatingPassword">PINCODE</label>
+                      </div>
+                </div>
+                <div class="col-5">
+                    <p-button label="Find City" (onClick)="findCity(Pincode.value)"
+                        styleClass="p-button-outlined p-button-success h-4rem w-7rem"></p-button>
+                </div>
             </div>
             <div class="row w-100 justify-content-center">
                 <div class="col-6">
-                    <span class="p-float-label">
-                        <input type="text" pInputText class="w-100" />
-                        <label htmlFor="number-input">District Name</label>
+                    <span class="col-md-6 col-sm-12 mt-2">
+                        <input type="text" formControlName="CircleName" pInputText class="w-100" />
+                        <label htmlFor="number-input">Circle Name</label>
                     </span>
                 </div>
-                <div class="col-6">
+                <div class="col-md-6 col-sm-12 mt-2">
                     <span class="p-float-label">
-                        <input type="text" pInputText class="w-100" />
-                        <label htmlFor="number-input">State Name</label>
+                        <input type="text" formControlName="RegionName" pInputText class="w-100" />
+                        <label htmlFor="number-input">Region Name</label>
                     </span>
+                </div>
+                <div class="col-md-6 col-sm-12 mt-2">
+                    <span class="p-float-label">
+                        <input type="text" formControlName="DivisionName" pInputText class="w-100" />
+                        <label htmlFor="number-input">Division Name</label>
+                        </span>
+                </div>
+                <div class="col-md-6 col-sm-12 mt-2">
+                    <div class="card flex justify-content-start">
+                        <select id="" (click)="setAddress()" aria-placeholder="Office Name" formControlName="OfficeName"
+                            class="form-control">
+                            <option value="" disabled>Select Office</option>
+                            <option *ngFor="let office of citiesData" [value]="office.id">{{office.officeName}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row w-100 mt-3 justify-content-start">
+                    <div class="col-md-6 col-sm-12 mt-2">
+                        <span class="p-float-label">
+                            <input type="text" formControlName="DistrictName" pInputText class="w-100" />
+                            <label htmlFor="number-input">District Name</label>
+                        </span>
+                    </div>
+                    <div class="col-md-6 col-sm-12 mt-2">
+                        <span class="p-float-label">
+                            <input type="text" formControlName="StateName" pInputText class="w-100" />
+                            <label htmlFor="number-input">State Name</label>
+                        </span>
+                    </div>
                 </div>
             </div>
+        </form>
+
+        <div class="row w-100 mt-3 justify-content-start">
+            <div class="col-6" >
+                <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
+                <input type="text" hidden formControlName="img"  class="w-100" />
+            </div>
+            <div class="col-6" [hidden]="showImg">
+                <h4>Selected Image</h4>
+                <img [src]="imgPath"  alt="profile pic" style="width: 60px; height:40px ;">
+            </div>
         </div>
-    </div>
-</form>
+        <p-button type="ngSubmit" label="Submit" class="p-button-outlined p-button-warning"></p-button>
+    </form>
+</div>

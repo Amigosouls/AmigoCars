@@ -1,0 +1,67 @@
+<nav class="navbar navbar-expand-lg navbar-dark  bg-transparent">
+  <div class="container-fluid">
+    <a class="navbar-brand ms-3" href="#">
+      <img src="https://localhost:44304/Resources/Images/site_logo.gif" alt="logo" height="40" width="80" srcset="">
+      Bootstrap
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ms-5">
+        <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
+        <a class="nav-link" href="#">Features</a>
+        <a class="nav-link" href="#">Pricing</a>
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </div>
+      <div class="navbar-nav ms-auto me-5" *ngIf="!logged">
+        <p-button pRipple (click)="showDialog()" data-bs-target="#staticBackdrop" data-bs-toggle="modal" label="Sign In"
+          icon="pi pi-users" styleClass="p-button-warning"></p-button>
+        <p-button label="Register" routerLink="register" icon="pi pi-users" class="ms-3"
+          styleClass="p-button-warning"></p-button>
+      </div>
+      <div class="navbar-nav ms-auto me-5" *ngIf="logged">
+        <p-tag [style]="{ 'background': 'linear-gradient(-225deg,#AC32E4 0%,#7918F2 48%,#4801FF 100%)'}">
+          <div class="flex align-items-center gap-2">
+              <img alt="Country" src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png" class="flag flag-it" style="width: '18px'" />
+              <span class="text-base">Italia</span>
+              <i class="pi pi-times text-xs"></i>
+          </div>
+      </p-tag>
+      </div>
+    </div>
+  </div>
+</nav>
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  style="height: 60rem;" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row ">
+
+          <div class="col-md-12 col-sm-12 bg-bluegray-800">
+            <app-login></app-login>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 
+  <p-dialog header="Register" [style]="{ width: '70vw', height: '300px' }" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
+    <div class="row h-18rem">
+      
+      <div class="col-md-12 col-sm-12 bg-bluegray-800">
+        <app-register></app-register>
+      </div>
+    </div>
+</p-dialog> -->

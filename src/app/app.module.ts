@@ -14,12 +14,31 @@ import { HttpClientModule } from '@angular/common/http';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { DropdownModule } from 'primeng/dropdown';
+import { ButtonModule } from 'primeng/button';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { UploadComponent } from './upload/upload.component';
+import { HomeComponent } from './home/home.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { FooterComponent } from './footer/footer.component';
+import { DialogModule } from 'primeng/dialog';
+import { TagModule } from 'primeng/tag';
+//material
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatButtonModule} from '@angular/material/button';
+import { DashboardComponent } from './dashboard/dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
     LoginComponent,
     RegisterComponent,
+    UploadComponent,
+    HomeComponent,
+    NavbarComponent,
+    FooterComponent,
+    DashboardComponent,
 
 
   ],
@@ -32,9 +51,16 @@ import { InputNumberModule } from 'primeng/inputnumber';
     InputTextModule,
     PasswordModule,
     HttpClientModule,
-    InputNumberModule
+    InputNumberModule,
+    DropdownModule,
+    ButtonModule,
+    ToastModule,
+    DialogModule,
+    MatStepperModule,
+    MatButtonModule,
+    TagModule
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

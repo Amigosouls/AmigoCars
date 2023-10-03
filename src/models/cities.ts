@@ -1,9 +1,9 @@
 export interface Cities{
-    CircleName : string,
-    DivisionName:string,
-    RegionName:string,
-    OfficeName:string,
-    District:string,
-    StateName:string,
-    Id:number
+    circleName : string,
+    divisionName:string,
+    regionName:string,
+    officeName:string,
+    district:string,
+    stateName:string,
+    id:number
 }

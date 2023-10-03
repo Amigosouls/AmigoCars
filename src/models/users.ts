@@ -8,3 +8,12 @@ export interface Users{
     lastLogin:Date,
     img:string,
 }
+export interface Response{
+    statusCode:number,
+    message:string
+}
+
+export interface TokenDetails{
+    token:string,
+    message:string
+}
