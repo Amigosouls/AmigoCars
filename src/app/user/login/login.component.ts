@@ -1,4 +1,4 @@
-import { Component,OnInit } from '@angular/core';
+import { Component,OnInit, Output } from '@angular/core';
 import {FormGroup, FormControl, NgForm, Validators} from '@angular/forms'
 import { Route, Router } from '@angular/router';
 import { Users } from 'src/models/users';
@@ -14,7 +14,6 @@ export class LoginComponent implements OnInit {
 signInForm!:FormGroup;
 userEmail!:FormControl;
 password!:FormControl;
-
 ngOnInit(): void {
   this.userEmail = new FormControl('');
   this.password = new FormControl('');
@@ -29,5 +28,5 @@ ngOnInit(): void {
   console.log(user)
   this.userService.validateUser(user);
 }
-
+  
 }

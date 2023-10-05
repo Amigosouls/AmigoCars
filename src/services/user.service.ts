@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { TokenDetails, Users } from 'src/models/users';
 import { environment } from 'src/environments/environments';
-import { FormGroup } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 @Injectable({
@@ -13,14 +14,27 @@ import { Router } from '@angular/router';
 export class UserService {
 
   constructor(private httpClient: HttpClient, private messages:MessageService,private router:Router) { }
+
+  decodeToken(){
+    const jwtHelper = new JwtHelperService();
+    const token = this.getToken()!;
+    console.log(jwtHelper.decodeToken(token));
+    return jwtHelper.decodeToken(token);
+  }
+  
+  getLoggedUser(email:any){
+    return this.httpClient.get(environment.userData+"/LoggedUser?email="+email);
+  }
+
   validateUser(user: Users):void {
     this.httpClient.post<TokenDetails>(environment.userData + '/GetUsers', user).subscribe(
       {
         next: (res => {
           alert(res.message);
           console.log(res);
-          this.setToken(res.token);
+          this.setToken(res.token,res.email);
           console.log(res);
+          this.validateAuth(true);
           setTimeout(() => {
             this.router.navigateByUrl('/');
           }, 2000);
@@ -49,8 +63,9 @@ export class UserService {
     );
   }
 
-  setToken(token:string):void{
+  setToken(token:string,email:string):void{
     localStorage.setItem('token',token);
+    localStorage.setItem('email',email);
   }
   getToken():string|null{
     return localStorage.getItem('token');
@@ -58,7 +73,11 @@ export class UserService {
   public static isLoggedIn():boolean{
     return !!localStorage.getItem('token');
   }
-  signOut():void{
+  public authoriseSubject = new Subject<boolean>();
+  public validateAuth(state:boolean){
+    this.authoriseSubject.next(state);
+  }
+  public signOut(){
     localStorage.clear();
   }
 }

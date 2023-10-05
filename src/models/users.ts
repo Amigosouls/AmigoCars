@@ -15,5 +15,6 @@ export interface Response{
 
 export interface TokenDetails{
     token:string,
-    message:string
+    message:string,
+    email:string
 }

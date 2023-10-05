@@ -8,7 +8,9 @@ import { AppComponent } from './app.component';
 import { UserComponent } from './user/user.component';
 import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { TokenInterceptor } from './interceptors/token.interceptor';
+import { SellcarComponent } from './sellcar/sellcar.component';
 
 //PrimeNg imports
 import { InputTextModule } from 'primeng/inputtext';
@@ -28,6 +30,8 @@ import { TagModule } from 'primeng/tag';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatButtonModule} from '@angular/material/button';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +43,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     NavbarComponent,
     FooterComponent,
     DashboardComponent,
+    SellcarComponent,
 
 
   ],
@@ -58,9 +63,15 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     DialogModule,
     MatStepperModule,
     MatButtonModule,
-    TagModule
+    TagModule,
+    MatInputModule,
+    MatSelectModule
   ],
-  providers: [MessageService],
+  providers: [MessageService,{
+    provide:HTTP_INTERCEPTORS,
+    useClass:TokenInterceptor,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

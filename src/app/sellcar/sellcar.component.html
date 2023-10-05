@@ -1,0 +1,155 @@
+<p-toast></p-toast>
+<div class="container-fluid justify-content-center postad">
+  <h3 class="text-center text-white">Tell us about Your vehicle</h3>
+  <div class="container bg-purple-200">
+    <div class="row justify-content-center">
+      <mat-stepper class="bg-transparent justify-content-center">
+        <mat-step [stepControl]="fuelType">
+          <form [formGroup]="aboutNo">
+            <ng-template matStepLabel>Vehicle Number </ng-template>
+
+            <mat-form-field [style.width.px]=250>
+              <mat-label>RTO Circle </mat-label>
+              <input matInput type="text" maxlength="2" required formControlName="statePrefix"
+                placeholder="State Prefix" />
+            </mat-form-field>
+            <mat-form-field [style.width.px]=250 class="ps-2">
+              <mat-label>District Code</mat-label>
+              <input matInput type="number" maxlength="2" required formControlName="districtCode"
+                placeholder="District Code" />
+            </mat-form-field>
+
+            <button (click)="findRto(statePrefix.value+districtCode.value)" mat-flat-button color="primary" class=" ms-5">Find
+              Rto</button>
+            <div class="row">
+              <mat-form-field [style.width.px]=327>
+                <mat-label>Select RTO Name </mat-label>
+                <mat-select formControlName="rtoOffice" required [disabled]="showRto">
+                  <mat-option (click)="setRto()" *ngFor="let rto of rtoNames" [value]="rto.rtoId">
+                    {{rto.place}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field [style.width.px]=327>
+                <mat-label>StateName </mat-label>
+                <input matInput type="text" required readonly formControlName="stateName" placeholder="StateName" />
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field [style.width.px]=327>
+                <mat-label>Your 6/7 digit registration number </mat-label>
+                <input matInput type="text" required maxlength="7" formControlName="registrationNo"
+                  placeholder="Registration No" />
+              </mat-form-field>
+            </div>
+            <div>
+              <button class="btn btn-primary" mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="price" label="Car Details ">
+          <form [formGroup]="aboutVehicle">
+            <mat-label> </mat-label>
+            <mat-form-field [style.width.px]=250 class="ps-2">
+              <mat-label>Brand Name</mat-label>
+              <input matInput type="text" required formControlName="brandName" placeholder="Brand Name" />
+            </mat-form-field>
+            <mat-form-field [style.width.px]=250 class="ps-2">
+              <mat-label>Model Name</mat-label>
+              <input matInput type="text" required formControlName="modelName" placeholder="Model Name" />
+            </mat-form-field>
+            <button (click)="carDetail(brandName.value,modelName.value)" mat-flat-button color="primary" class="ms-3" >Find
+              Variant</button>
+            <div class="row">
+              <mat-form-field [style.width.px]=500>
+                <mat-label>Select variant </mat-label>
+                <mat-select formControlName="variant" [disabled]="showRto">
+                  <mat-option (click)="setCarDetails()" *ngFor="let cars of cardata" [value]="cars.carId">
+                    {{cars.model+' '+cars.variant}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field [style.width.px]=250 class="ps-2">
+                <mat-label>Fuel Type</mat-label>
+                <input matInput type="text" required formControlName="fuelType" placeholder="Fuel" />
+              </mat-form-field>
+              <mat-form-field [style.width.px]=250 class="ps-2">
+                <mat-label>Price</mat-label>
+                <input matInput type="number" [max]="maxPrice" required formControlName="price"
+                  placeholder="Price You wish to Sell" />
+              </mat-form-field>
+              <mat-form-field [style.width.px]=500>
+                <mat-label>Select Transmission </mat-label>
+                <mat-select formControlName="transmission" required>
+                  <mat-option value="Manual">Manual
+                  </mat-option>
+                  <mat-option value="Automatic">AutoMatic
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div>
+              <button class="btn btn-primary" mat-button matStepperPrevious>Back</button>
+              <button class="btn btn-primary" mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="price" label="Needful Data ">
+          <form [formGroup]="needfullData">
+            <mat-form-field [style.width.px]=300 >
+              <mat-label>KM Driven</mat-label>
+              <input matInput type="number" required formControlName="kmDriven" placeholder="Km Driven" />
+            </mat-form-field>
+            <mat-form-field [style.width.px]=300 >
+              <mat-label>Year</mat-label>
+              <input matInput type="number" required max="2023" formControlName="year"
+                placeholder="Year Of Manufacturing" />
+            </mat-form-field>
+            <div class="row">
+              <mat-form-field [style.width.px]=300 >
+                <mat-label>Pincode</mat-label>
+                <input matInput type="number" required maxlength="6" formControlName="pincode"
+                  placeholder="Enter Pincode of car Location" />
+              </mat-form-field>
+              <button (click)="findCity(pincode.value)" color="primary" mat-flat-button class="w-1 mt-2">Find</button>
+              <mat-form-field [style.width.px]=300 >
+                  <mat-select    aria-placeholder="Office Name" formControlName="OfficeName"
+                    class=" w-50">
+                    <mat-option value="" disabled>Select Office</mat-option>
+                    <mat-option (click)="setAddress()" *ngFor="let office of citiesData" [value]="office.id">{{office.officeName}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              <mat-form-field hidden [style.width.px]=200 class="ps-2">
+                <mat-label>Car Location</mat-label>
+                <input matInput type="text" required formControlName="carLocation" placeholder="Car Location" />
+              </mat-form-field>
+              <mat-form-field [style.width.px]=200 class="ps-2">
+                <mat-label>State Name</mat-label>
+                <input matInput type="text" required formControlName="state" placeholder="Car Location" />
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <h4>Image</h4>
+              <div class="col-5">
+                <div class="col-6" [hidden]="showImg">
+                  <h4>Selected Image</h4>
+                  <img [src]="imgPath" alt="profile pic" style="width: 100px; height:100px ;">
+                  <input hidden type="text" required formControlName="carImg" placeholder="Car Location" />
+                </div>
+              </div>
+              <div class="col-5">
+                <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
+              </div>
+            </div>
+          </form>
+          <form  [formGroup]="sellingCarDetail" (ngSubmit)="onSubmission(sellingCarDetail.value)">
+            <button type="submit" mat-flat-button color="primary" class="w-50" >Submit</button>
+          </form>
+          <button class="btn btn-primary mt-4" mat-button matStepperPrevious>Back</button>
+        </mat-step>
+      </mat-stepper>
+    </div>
+  </div>
+</div>

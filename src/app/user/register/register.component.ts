@@ -16,6 +16,7 @@ import { Users } from 'src/models/users';
 export class RegisterComponent implements OnInit {
   citiesData: Cities[] = [];
   showImg:boolean=true;
+  
   constructor(private userService:UserService,private cityService: CitiesService, private messages:MessageService, private http:HttpClient) {}
   registrationForm!:FormGroup;
   userName!:FormControl;
@@ -31,7 +32,7 @@ export class RegisterComponent implements OnInit {
   OfficeName!:FormControl;
   DistrictName!:FormControl;
   StateName!:FormControl;
-  imgPath:string=''
+  imgPath:string='';
   addressDetails!:FormGroup;
   public message!:string;
   public progress!:number;

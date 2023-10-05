@@ -11,7 +11,7 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav ms-5">
         <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
-        <a class="nav-link" href="#">Features</a>
+        <a class="nav-link" routerLink="sellcar">Sell a Car</a>
         <a class="nav-link" href="#">Pricing</a>
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
       </div>
@@ -22,13 +22,7 @@
           styleClass="p-button-warning"></p-button>
       </div>
       <div class="navbar-nav ms-auto me-5" *ngIf="logged">
-        <p-tag [style]="{ 'background': 'linear-gradient(-225deg,#AC32E4 0%,#7918F2 48%,#4801FF 100%)'}">
-          <div class="flex align-items-center gap-2">
-              <img alt="Country" src="https://primefaces.org/cdn/primeng/images/demo/flag/flag_placeholder.png" class="flag flag-it" style="width: '18px'" />
-              <span class="text-base">Italia</span>
-              <i class="pi pi-times text-xs"></i>
-          </div>
-      </p-tag>
+        <button>{{userData.userName}}</button>
       </div>
     </div>
   </div>
@@ -45,7 +39,7 @@
         <div class="row ">
 
           <div class="col-md-12 col-sm-12 bg-bluegray-800">
-            <app-login></app-login>
+            <app-login ></app-login>
           </div>
         </div>
       </div>
