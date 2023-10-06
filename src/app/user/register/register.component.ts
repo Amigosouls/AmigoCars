@@ -110,6 +110,7 @@ export class RegisterComponent implements OnInit {
   public uploadFinished=(event:any)=>{
     this.response = event;
     this.img.setValue(this.response.dbPath);
+    console.log(this.response.dbPath)
     this.showImg = false;
     this.imgPath= `https://localhost:44304/${this.response.dbPath}`
   }

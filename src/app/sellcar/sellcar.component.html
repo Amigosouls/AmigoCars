@@ -15,7 +15,7 @@
             </mat-form-field>
             <mat-form-field [style.width.px]=250 class="ps-2">
               <mat-label>District Code</mat-label>
-              <input matInput type="number" maxlength="2" required formControlName="districtCode"
+              <input matInput type="text" maxlength="2" required formControlName="districtCode"
                 placeholder="District Code" />
             </mat-form-field>
 
@@ -24,7 +24,7 @@
             <div class="row">
               <mat-form-field [style.width.px]=327>
                 <mat-label>Select RTO Name </mat-label>
-                <mat-select formControlName="rtoOffice" required [disabled]="showRto">
+                <mat-select formControlName="rtoCircle" required [disabled]="showRto">
                   <mat-option (click)="setRto()" *ngFor="let rto of rtoNames" [value]="rto.rtoId">
                     {{rto.place}}
                   </mat-option>
@@ -38,12 +38,12 @@
             <div class="row">
               <mat-form-field [style.width.px]=327>
                 <mat-label>Your 6/7 digit registration number </mat-label>
-                <input matInput type="text" required maxlength="7" formControlName="registrationNo"
+                <input matInput type="text" required  formControlName="registrationNo"
                   placeholder="Registration No" />
               </mat-form-field>
             </div>
             <div>
-              <button class="btn btn-primary" mat-button matStepperNext>Next</button>
+              <button class="btn btn-primary" (click)="setRegistrationNo()" mat-button matStepperNext>Next</button>
             </div>
           </form>
         </mat-step>
@@ -52,13 +52,13 @@
             <mat-label> </mat-label>
             <mat-form-field [style.width.px]=250 class="ps-2">
               <mat-label>Brand Name</mat-label>
-              <input matInput type="text" required formControlName="brandName" placeholder="Brand Name" />
+              <input matInput type="text" required formControlName="brand" placeholder="Brand Name" />
             </mat-form-field>
             <mat-form-field [style.width.px]=250 class="ps-2">
               <mat-label>Model Name</mat-label>
-              <input matInput type="text" required formControlName="modelName" placeholder="Model Name" />
+              <input matInput type="text" required formControlName="model" placeholder="Model Name" />
             </mat-form-field>
-            <button (click)="carDetail(brandName.value,modelName.value)" mat-flat-button color="primary" class="ms-3" >Find
+            <button (click)="carDetail(brand.value,model.value)" mat-flat-button color="primary" class="ms-3" >Find
               Variant</button>
             <div class="row">
               <mat-form-field [style.width.px]=500>
@@ -144,7 +144,7 @@
               </div>
             </div>
           </form>
-          <form  [formGroup]="sellingCarDetail" (ngSubmit)="onSubmission(sellingCarDetail.value)">
+          <form  [formGroup]="sellingCarDetail" (ngSubmit)=" sellingCarDetail.valid && onSubmission(sellingCarDetail.value)">
             <button type="submit" mat-flat-button color="primary" class="w-50" >Submit</button>
           </form>
           <button class="btn btn-primary mt-4" mat-button matStepperPrevious>Back</button>

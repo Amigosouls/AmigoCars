@@ -32,6 +32,10 @@ import {MatButtonModule} from '@angular/material/button';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import { ViewCarsComponent } from './view-cars/view-cars.component';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { MasterviewComponent } from './masterview/masterview.component';
+import { SortPipe } from './shared/sort.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +48,9 @@ import {MatSelectModule} from '@angular/material/select';
     FooterComponent,
     DashboardComponent,
     SellcarComponent,
+    ViewCarsComponent,
+    MasterviewComponent,
+    SortPipe,
 
 
   ],
@@ -65,7 +72,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatButtonModule,
     TagModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    NgxPaginationModule
   ],
   providers: [MessageService,{
     provide:HTTP_INTERCEPTORS,

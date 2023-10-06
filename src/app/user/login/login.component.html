@@ -1,24 +1,44 @@
 <form [formGroup]="signInForm" (ngSubmit)="signInForm.valid && onSubmit(signInForm.value)" novalidate>
-    <div class="grid blue-container w-50  justify-content-start bg-blue-300 ">
-        <div class="col-6 border-round col-offset-2">
+    <div class="grid blue-container  justify-content-start ">
+        <div class="col-12 border-round col-offset-2">
             <h5 class="text-purple-600 text-xl">Login Form</h5>
         </div>
-        <div class="col-8  col-offset-1  border-round  bg-blue-400">
-            <div class="card p-3 justify-content-center w-100">
+        <div class="col-8  col-offset-1  border-round  ">
+            <div class="card p-3 justify-content-center w-100 pt-5">
                 <span class="p-float-label">
-                    <input formControlName="userEmail" class="sm:max-w-8rem lg:max-w-screen" pInputText id="username" />
+                    <input formControlName="userEmail" required class="sm:max-w-8rem lg:max-w-screen" pInputText id="username" />
                     <label htmlFor="username">Username</label>
                 </span>
             </div>
         </div>
-        <div class="col-8 col-offset-1 mt-3 border-round  bg-blue-400">
-            <div class="card p-3 justify-content-center">
+        <div class="col-8 col-offset-1 mt-3 border-round ">
+            <div class="card p-3 justify-content-center pt-5">
                 <span class="p-float-label">
-                    <p-password formControlName="password" [feedback]="false" [toggleMask]="true"></p-password>
-                    <label htmlFor="Password" class="text-blue-600">Password</label>
+                    <p-password formControlName="password" required [feedback]="false" [toggleMask]="true"></p-password>
+                    <label htmlFor="Password"  class="text-blue-600">Password</label>
                 </span>
             </div>
+           
         </div>
-        <button class="col-3 mb-3 col-offset-2 mt-5 p-3 border-0 bg-purple-500 border-round text-white text-lg te">Submit</button>
+        <div class="row justify-content-end mt-5">
+            <div class="col-4 me-auto"><button class="btn btn-outline-primary text-white font-bold" (click)="forgotPassword()">Forgot Paasword?</button></div>
+        </div>
+        <button type="submit" id="btnClose"  data-bs-dismiss="modal" class="col-3 mb-3 col-offset-2 mt-5 p-3 border-0 bg-purple-500 border-round text-white text-lg ">Submit</button>
     </div>
   </form>
+  <p-dialog header="Forgot Password" [(visible)]="visible" [style]="{width: '50vw'}">
+    <div class="row">
+        <form [formGroup]="recoveryForm" (ngSubmit)="recoveryForm.valid && onRecoverSubmit(recoveryForm)" >
+            <div class="col-6">
+                <div class="card p-3 justify-content-center w-100">
+                    <span class="p-float-label">
+                        <input formControlName="recoveryEmail" required class="w-50" type="email" id="forgotPassword" />
+                        <label htmlFor="username">Email</label>
+                    </span>                
+                </div>
+                <span *ngIf="recoveryEmail.dirty&&recoveryEmail.invalid">Email is not valid</span>
+            </div>
+            <button type="submit">Recover</button>
+        </form>
+    </div>
+</p-dialog>

@@ -7,6 +7,7 @@ export interface Users{
     isDeleted:boolean,
     lastLogin:Date,
     img:string,
+    userEmail:string
 }
 export interface Response{
     statusCode:number,
@@ -14,7 +15,6 @@ export interface Response{
 }
 
 export interface TokenDetails{
-    token:string,
-    message:string,
-    email:string
+    accessToken:string,
+    refreshToken:string
 }

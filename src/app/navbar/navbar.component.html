@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <a class="navbar-brand ms-3" href="#">
       <img src="https://localhost:44304/Resources/Images/site_logo.gif" alt="logo" height="40" width="80" srcset="">
-      Bootstrap
+      Amigo Cars
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
       aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,7 +12,7 @@
       <div class="navbar-nav ms-5">
         <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
         <a class="nav-link" routerLink="sellcar">Sell a Car</a>
-        <a class="nav-link" href="#">Pricing</a>
+        <a class="nav-link" routerLink="viewcars">View Cars</a>
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
       </div>
       <div class="navbar-nav ms-auto me-5" *ngIf="!logged">
@@ -21,8 +21,13 @@
         <p-button label="Register" routerLink="register" icon="pi pi-users" class="ms-3"
           styleClass="p-button-warning"></p-button>
       </div>
-      <div class="navbar-nav ms-auto me-5" *ngIf="logged">
-        <button>{{userData.userName}}</button>
+      <div class="dropdown  navbar-nav ms-auto me-5 mx-7" *ngIf="logged">
+        <button class="dropbtn bg-transparent border-round" ><img src="{{'https://localhost:44304/'+userImg}}" class="img-fluid border-round " height="40" width="60" alt="" srcset=""> &nbsp; &nbsp;{{fullName}}</button>
+        <div class="dropdown-content bg-purple-200 border-round">
+          <a routerLink="masterview" *ngIf="roleName=='User'">Manage</a>
+          <a >View Profile</a>
+          <button class="btn btn-info w-9rem" (click)="logout()">Logout</button>
+        </div>
       </div>
     </div>
   </div>
@@ -32,30 +37,20 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">Login</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <div class="row ">
 
-          <div class="col-md-12 col-sm-12 bg-bluegray-800">
+          <div class="col-md-12 col-sm-12 ">
             <app-login ></app-login>
           </div>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
       </div>
     </div>
   </div>
 </div>
-<!-- 
-  <p-dialog header="Register" [style]="{ width: '70vw', height: '300px' }" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
-    <div class="row h-18rem">
-      
-      <div class="col-md-12 col-sm-12 bg-bluegray-800">
-        <app-register></app-register>
-      </div>
-    </div>
-</p-dialog> -->

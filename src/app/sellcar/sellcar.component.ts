@@ -5,6 +5,7 @@ import { CarsData } from 'src/models/cars';
 import { Cities, Rto } from 'src/models/cities';
 import { CarsService } from 'src/services/cars.service';
 import { CitiesService } from 'src/services/cities.service';
+import { UserService } from 'src/services/user.service';
 
 
 @Component({
@@ -13,12 +14,12 @@ import { CitiesService } from 'src/services/cities.service';
   styleUrls: ['./sellcar.component.css']
 })
 export class SellcarComponent implements OnInit {
-  constructor(private citiesService:CitiesService, private messages:MessageService, private carsService:CarsService){}
+  constructor(private citiesService:CitiesService, private messages:MessageService, private carsService:CarsService, private userService:UserService){}
 aboutNo!:FormGroup;
 registrationNo!:FormControl;
 brand!:FormControl;
 year!:FormControl;
-modelName!:FormControl;
+model!:FormControl;
 fuelType!:FormControl;
 transmission!:FormControl;
 rtoCircle!:FormControl;
@@ -32,14 +33,13 @@ rtoNames:Rto[]=[];
 cardata:CarsData[]=[];
 citiesData:Cities[]=[];
 districtName!:FormControl;
-rtoOffice!:FormControl;
 variant!:FormControl;
 showRto:boolean=true;
 stateName!:FormControl;
 aboutVehicle!:FormGroup;
-brandName!:FormControl;
 pincode!:FormControl;
 maxPrice!:number;
+sellerId!:FormControl;
 sellingCarDetail!:FormGroup;
 needfullData!:FormGroup;
 OfficeName!:FormControl;
@@ -54,11 +54,11 @@ ngOnInit(): void {
   this.districtCode = new FormControl('',[Validators.required]);
   this.districtName = new FormControl('',[Validators.required]);
   this.stateName = new FormControl('',[Validators.required]);
-  this.rtoOffice = new FormControl('',[Validators.required]);
+  this.rtoCircle = new FormControl('',[Validators.required]);
   this.registrationNo = new FormControl('',[Validators.required]);
   this.variant = new FormControl('');
-  this.modelName = new FormControl('',[Validators.required]);
-  this.brandName = new FormControl('',[Validators.required]);
+  this.model = new FormControl('',[Validators.required]);
+  this.brand = new FormControl('',[Validators.required]);
   this.fuelType = new FormControl('',[Validators.required]);
   this.price = new FormControl('');
   this.transmission = new FormControl('',[Validators.required]);
@@ -69,18 +69,19 @@ ngOnInit(): void {
   this.pincode = new FormControl('',[Validators.required]);
   this.OfficeName = new FormControl('');
   this.state = new FormControl('');
+  this.sellerId = new FormControl('');
   this.aboutNo = new FormGroup({
     statePrefix:this.statePrefix,
     districtCode:this.districtCode,
     districtName:this.districtName,
     stateName:this.stateName,
-    rtoOffice:this.rtoOffice,
+    rtoCircle:this.rtoCircle,
     registrationNo : this.registrationNo
   });
   this.aboutVehicle = new FormGroup({
-    modelName:this.modelName,
+    model:this.model,
     variant:this.variant,
-    brandName:this.brandName,
+    brand:this.brand,
     fuelType:this.fuelType,
     transmission:this.transmission,
     price:this.price
@@ -95,24 +96,25 @@ ngOnInit(): void {
     state:this.state
   });
   this.sellingCarDetail = new FormGroup({
-    rtoOffice:this.rtoOffice,
+    rtoCircle:this.rtoCircle,
     registrationNo : this.registrationNo,
-    modelName:this.modelName,
+    model:this.model,
     variant:this.variant,
-    brandName:this.brandName,
+    brand:this.brand,
     fuelType:this.fuelType,
     transmission:this.transmission,
     price:this.price,
     kmDriven : this.kmDriven,
     carLocation: this.carLocation,
     carImg : this.carImg,
+    sellerId:this.sellerId,
     year:this.year
   })
 }
 
-  onSubmission(data:FormGroup){
-   
-    console.log(data);
+  onSubmission(cardata:FormGroup){
+    console.log(cardata);
+   this.carsService.postCarDetails(cardata);
   }
   
   findRto(rto:string):void{
@@ -132,17 +134,17 @@ ngOnInit(): void {
     });
   }
   setRto(){
-    console.log(this.rtoOffice.value)
-    const searchIndex = this.rtoNames.filter((rto) => rto.rtoId==this.rtoOffice.value);
+    console.log(this.rtoCircle.value)
+    const searchIndex = this.rtoNames.filter((rto) => rto.rtoId==this.rtoCircle.value);
     console.log(searchIndex)
     if(searchIndex!=null && searchIndex.length>0){
       this.stateName.setValue(searchIndex[0].state);
     }
 
   }
-  carDetail(brand:string,model:string):void{
-    if(this.brandName.valid && this.modelName.valid){
-      this.carsService.getCarsData(brand,model).subscribe({
+  carDetail(brandName:string,modelName:string):void{
+    if(this.brand.valid && this.model.valid){
+      this.carsService.getCarsData(brandName,modelName).subscribe({
         next: (res) => {
           this.cardata=[];
           this.cardata = res;
@@ -161,8 +163,8 @@ ngOnInit(): void {
   }
   setCarDetails(){
     const searchIndex = this.cardata.filter((car) => car.carId==this.variant.value);
-    this.brandName.setValue(searchIndex[0].make);
-    this.modelName.setValue(searchIndex[0].model);
+    this.brand.setValue(searchIndex[0].make);
+    this.model.setValue(searchIndex[0].model);
     this.variant.setValue(searchIndex[0].variant);
     this.fuelType.setValue(searchIndex[0].fuelType);
     this.maxPrice = searchIndex[0].price
@@ -194,5 +196,14 @@ ngOnInit(): void {
         alert(err?.error.Message);
       },
     });
+  }
+  public setRegistrationNo=()=>{
+    this.userService.getLoggedUser(localStorage.getItem('email')).subscribe(
+      (res)=>{
+        this.sellerId.setValue(res.userId);
+      }
+    );
+    
+    this.registrationNo.setValue( this.statePrefix.value+this.districtCode.value+this.registrationNo.value);
   }
 }

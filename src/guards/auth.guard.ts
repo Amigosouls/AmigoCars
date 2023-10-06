@@ -8,9 +8,7 @@ export const authGuard: CanActivateFn = (route, state) => {
   if(UserService.isLoggedIn()){
     return true
   }
-  else{
-    router.navigateByUrl('login');
-    message.add({ severity: 'error', summary: 'Please Login!', detail: "Login to continue .", sticky: true });
+  else{    message.add({ severity: 'error', summary: 'Please Login!', detail: "Login to continue .", sticky: true });
   }
   return false;
 };
