@@ -1,0 +1,10 @@
+.master{
+    background-image: url('https://localhost:44304/Resources/Images/audi.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+.tr{
+    overflow-x: scroll;
+}

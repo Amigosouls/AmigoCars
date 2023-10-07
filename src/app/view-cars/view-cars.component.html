@@ -1,34 +1,48 @@
-<div class="container border-bluegray-300">
-    <div class="row mt-5">
-        <div class="col-4" *ngFor="let car of pendingCars">
-            <div class="card" style="width: 23rem;">
-                <img src="{{'https://localhost:44304/'+car.carImg}}" class="card-img-top" height="200px" alt="Card image cap">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-5" style="border-right: 1px slateblue;">
-                            <h5>{{car.brand}}({{car.year}})
-                            </h5>
-                            <h3><span class="price">{{ car.price | currency : "INR" : "symbol" : "3.0"
-                                    }}</span>
-                            </h3><br>
-                            <button class="btn btn-info w-8rem" (click)="claimVehicle(car)">Buy Vehicle</button>
-                            <button class="btn btn-danger w-8rem mt-2">Show Aspects</button>
-                        </div>
-                        <div class="col-7">
-                            <h6><i class="fa-solid fa-car"></i> {{car.model}}</h6>
-                            <h6><i class="fa-solid fa-gas-pump"></i> {{car.fuelType}}</h6>
-                            <h6><i class="fa-solid fa-gears"></i> {{car.transmission}}</h6>
-                            <h6><i class="fa-solid fa-location-dot"></i> {{car.kmDriven}} KM</h6>
-                            <h6><i class="fa-solid fa-registered"></i> {{car.registrationNo | uppercase}}</h6>
+<p-toast></p-toast>
+<div class="container-fluid view">
+    <div class="container  border-bluegray-300">
+        <div class="row pt-3 align-content-evenly">
+            <div class="col-md-4 col-lg-4 col-sm-12" *ngFor="let car of pendingCars">
+                <div class="card mb-3" style="width: 18rem; height: 350px; overflow-y: scroll; ">
+                    <img src="{{'https://localhost:44304/'+car.carImg}}" class="card-img-top" style="max-height: fit-content;" height="180px"
+                        alt="Card image cap">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12" style="border-right: 1px slateblue;">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h6>{{car.brand}}({{car.year}})
+                                        </h6>
+                                        <h6><span class="price">{{ car.price | currency : "INR" : "symbol" : "3.0"
+                                                }}</span>
+                                        </h6><br>
+                                    </div>
+                                    <div class="col-6">
+                                        <button class="btn btn-info w-8rem" *ngIf="userRole=='User'" (click)="claimVehicle(car)">Buy
+                                            Vehicle</button>
+                                        <button class="btn btn-danger w-8rem mt-2">Show Aspects</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <h6><i class="fa-solid fa-car"></i> {{car.model}}</h6>
+                                        <h6><i class="fa-solid fa-gas-pump"></i> {{car.fuelType}}</h6>
+                                        <h6><i class="fa-solid fa-gears"></i> {{car.transmission}}</h6>
+                                    </div>
+                                    <div class="col-6">
+                                        <h6><i class="fa-solid fa-location-dot"></i> {{car.kmDriven}} KM</h6>
+                                        <h6><i class="fa-solid fa-registered"></i> {{car.registrationNo | uppercase}}
+                                        </h6>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
-
-
-<p-dialog header="Claim This car" [(visible)]="visible" [style]="{width: '50vw'}">
-    
-</p-dialog>

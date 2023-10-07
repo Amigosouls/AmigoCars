@@ -1,13 +1,36 @@
 <p-toast></p-toast>
 <div class="container-fluid home">
-    <div class="row h-20rem justify-content-center align-items-center">
+    <div class="row h-20rem justify-content-evenly align-items-center">
         <div class="col-md-6 col-sm-12 text-center ">
             <h3 class="col-12 text-white font-bold text-center">Get Your Dream Car Today</h3>
-            <p-button label="Show All Cars" styleClass="p-button-warning p-button-text"></p-button>
+            <p-button label="Show All Cars" routerLink="viewcars" styleClass="p-button-warning p-button-text"></p-button>
         </div>
         <div class="col-md-6 col-sm-12 ">
-            <h3 class="col-12 text-white font-bold text-center">Get Your Dream Car Today</h3>
-            <h3 class="col-12 text-white font-bold">Get Your Dream Car Today</h3>
+           <h2 class="text-center text-white">Sell Your car in Minutes</h2>
+           <p-carousel [value]="pendingCars" styleClass="custom-carousel text-white"  [numVisible]="3" [numScroll]="1" [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
+            <ng-template pTemplate="header">
+                <h5>Our Cars</h5>
+            </ng-template>
+            <ng-template let-car pTemplate="item">
+                <div class="product-item">
+                    <div class="product-item-content">
+                        <div class="p-mb-3">
+                            <img src="{{'https://localhost:44304/'+car.carImg}}" style="height: 180px!important;" alt="" srcset="">
+                        </div>
+                        <div>
+                            <h4 class="p-mb-1">{{car.brand}}</h4>
+                            <h6 class="p-mt-0 p-mb-3">${{car.price}}</h6>
+                            
+                            <div class="car-buttons p-mt-5">
+                                <p-button type="button" styleClass="p-button p-button-rounded p-mr-2" icon="pi pi-search"></p-button>
+                                <p-button type="button" styleClass="p-button-success p-button-rounded p-mr-2" icon="pi pi-star"></p-button>
+                                <p-button type="button" styleClass="p-button-help p-button-rounded" icon="pi pi-cog"></p-button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </p-carousel>
         </div>
     </div>
 

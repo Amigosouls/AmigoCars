@@ -1,2 +1,11 @@
 
 @import "primeicons/primeicons.css";
+
+@font-face {
+    font-family: myfont;
+    src: url(../src/assets/Athiti-Regular.ttf);
+}
+
+body{
+    font-family: myfont;
+}

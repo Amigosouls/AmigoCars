@@ -26,6 +26,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { DialogModule } from 'primeng/dialog';
 import { TagModule } from 'primeng/tag';
+import {CarouselModule} from 'primeng/carousel';
 //material
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatButtonModule} from '@angular/material/button';
@@ -36,6 +37,7 @@ import { ViewCarsComponent } from './view-cars/view-cars.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { MasterviewComponent } from './masterview/masterview.component';
 import { SortPipe } from './shared/sort.pipe';
+import { SearchPipe } from './shared/search.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +53,7 @@ import { SortPipe } from './shared/sort.pipe';
     ViewCarsComponent,
     MasterviewComponent,
     SortPipe,
+    SearchPipe,
 
 
   ],
@@ -73,8 +76,9 @@ import { SortPipe } from './shared/sort.pipe';
     TagModule,
     MatInputModule,
     MatSelectModule,
-    NgxPaginationModule
-  ],
+    NgxPaginationModule,
+    CarouselModule
+    ],
   providers: [MessageService,{
     provide:HTTP_INTERCEPTORS,
     useClass:TokenInterceptor,

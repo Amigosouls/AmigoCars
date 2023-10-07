@@ -23,3 +23,10 @@ export interface PendingCars{
     price: number,
     carStatus: string,
 }
+
+export interface BuyCar{
+
+  buyerId: number,
+  carId:number,
+  boughtDate: Date
+}

@@ -33,11 +33,8 @@ export class UserService {
     this.httpClient.post<TokenDetails>(environment.userData + '/GetUsers', user).subscribe(
       {
         next: (res => {
-
-          console.log(res);
           this.setToken(res.accessToken,user.userEmail);
           this.storeRefreshToken(res.refreshToken);
-          console.log(res);
           this.validateAuth(true);
           const tokenPayload = this.decodeToken();
           this.messages.add({ severity: 'success', summary: 'Login Success!', detail: 'Welcome to AmigoCars', sticky: true });

@@ -16,7 +16,7 @@ import { Users } from 'src/models/users';
 export class RegisterComponent implements OnInit {
   citiesData: Cities[] = [];
   showImg:boolean=true;
-  
+  isDisabled:boolean=true;
   constructor(private userService:UserService,private cityService: CitiesService, private messages:MessageService, private http:HttpClient) {}
   registrationForm!:FormGroup;
   userName!:FormControl;
@@ -39,7 +39,7 @@ export class RegisterComponent implements OnInit {
   public response:any={dbPath:''};
   ngOnInit(): void {
     this.userName = new FormControl('',[Validators.required]);
-    this.password = new FormControl('',[Validators.required]);
+    this.password = new FormControl('',[Validators.required,Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$')]);
     this.userEmail = new FormControl('',[Validators.required]);
     this.img= new FormControl('');
     this.userAddress = new FormControl('');
@@ -74,11 +74,10 @@ export class RegisterComponent implements OnInit {
     this.cityService.getCities(pin).subscribe({
       next: (res) => {
         this.citiesData = res;
-        console.log(res);
         this.messages.add({ severity: 'info', summary: 'PinCode Found', detail: 'Select Your Office Name', sticky: true });
+        this.isDisabled=false;
       },
       error: (err) => {
-        console.log(err);
         alert(err?.error.Message);
       },
     });

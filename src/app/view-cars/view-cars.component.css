@@ -1,0 +1,7 @@
+.view{
+    background-image: url('https://localhost:44304/Resources/Images/view_car.jpg');
+    min-height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}

@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { environment } from 'src/environments/environments';
-import { CarsData, PendingCars } from 'src/models/cars';
+import { BuyCar, CarsData, PendingCars } from 'src/models/cars';
 import { UserService } from './user.service';
 import { Observable } from 'rxjs';
 
@@ -23,9 +23,6 @@ export class CarsService {
     {
       next: (res => {
         this.messages.add({ severity: 'success', summary: 'Applied', detail: 'Car details saved! check status for further update!', sticky: true });
-        setTimeout(() => {
-          this.router.navigateByUrl('/');
-        }, 2000);
       }),
       error: (err => {
         this.messages.add({ severity: 'error', summary: 'Some Error occured', detail: err?.error, sticky: true });
@@ -34,7 +31,7 @@ export class CarsService {
    );
   }
 
-  getAllCars():Observable<PendingCars[]>{
+  getClaimedCars():Observable<PendingCars[]>{
     return this.httpClient.get<PendingCars[]>(environment.cars+'ViewCars');
   }
 
@@ -49,6 +46,19 @@ export class CarsService {
         next: (res => {
           this.messages.add({ severity: 'info', summary: 'Deleted', detail: 'Declined the Request for Sale', sticky: true });
          
+        }),
+        error: (err => {
+          this.messages.add({ severity: 'error', summary: 'Some Error occured', detail: err?.error, sticky: true });
+        })
+      }
+     );
+  }
+
+  buyCar(boughtDetail:BuyCar){
+    this.httpClient.post(environment.cars+'BuyCar',boughtDetail).subscribe(
+      {
+        next: (res => {
+          this.messages.add({ severity: 'success', summary: 'Car Bought', detail: '', sticky: true });         
         }),
         error: (err => {
           this.messages.add({ severity: 'error', summary: 'Some Error occured', detail: err?.error, sticky: true });

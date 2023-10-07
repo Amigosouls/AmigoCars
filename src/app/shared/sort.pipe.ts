@@ -23,7 +23,6 @@ export class SortPipe implements PipeTransform {
         return 0;
       }
     });
-    console.log(value)
     return value;
   }
 
